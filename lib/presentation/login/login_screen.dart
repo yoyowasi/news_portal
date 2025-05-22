@@ -1,7 +1,10 @@
 import 'package:easy_extension/easy_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:news_portal/api/auth_api.dart';
+import 'package:news_portal/app/router/app_router.dart';
 import 'package:news_portal/app/translations/app_trans.dart';
 import 'package:news_portal/presentation/widgets/app_logo.dart';
 import 'package:news_portal/presentation/widgets/app_scaffold.dart';
@@ -24,11 +27,16 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _onLogin(){
+  void _onLogin() async{
       final email = _emailController.text;
       final password = _passwordController.text;
-      debugPrint('이메일: ${email}');
-      debugPrint('비밀번호: ${password}');
+      final auth = AuthApi.login(
+        email: email,
+        password: password
+      );
+      if (auth == null) return;
+      if (!mounted) return;
+      context.goNamed(AppRoute.newsList.name);
     }
 
   TextField _textField(
