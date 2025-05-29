@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:news_portal/presentation/news_list/widgets/hot_topic.dart';
 import 'package:news_portal/presentation/widgets/app_logo.dart';
-import 'package:news_portal/presentation/widgets/app_scaffold.dart';
 
-class NewsListScreen extends StatelessWidget {
-  const NewsListScreen({super.key});
+class NewsListAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const NewsListAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      appBar: AppBar(
+    return AppBar(
         title: AppLogo(),
         actions: [
           IconButton(
@@ -22,12 +19,9 @@ class NewsListScreen extends StatelessWidget {
             icon: Icon(LucideIcons.menu),
           ),
         ],
-      ),
-      child: Column(
-        children: [
-          HotTopic(),
-        ],
-      ),
-    );
+      );
   }
+  
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

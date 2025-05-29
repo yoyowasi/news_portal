@@ -3,12 +3,14 @@ import 'package:flutter/widgets.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
-  const AppScaffold({super.key, required this.child});
+  final PreferredSizeWidget? appBar;
+  const AppScaffold({super.key, required this.child, this.appBar});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: child)
+      appBar: appBar,
+      body: SafeArea(child: child),
     );
   }
 }
